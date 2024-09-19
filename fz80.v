@@ -1180,9 +1180,10 @@ module alu(c_in, im, a, b, inva, invb, reg_q_c, reg_q_h, s_and, s_or, s_xor, ec,
 	wire rl = l & im[2];
 	wire rr = r & im[3];
 	wire sra = r & im[5];
+	wire sll = l & im[6];
 	wire ci = c_in ^ invb;
 	assign z[0] = s_and & tand[0] | s_or & tor[0] | s_xor & (a1[0] ^ b1[0] ^ ci & ec)
-		| rlc & b1[7] | rl & reg_q_c | r & b1[1];
+		| rlc & b1[7] | rl & reg_q_c | r & b1[1] | sll;
 	assign c[0] = tand[0] | tor[0] & ci;
 	assign z[1] = s_and & tand[1] | s_or & tor[1] | s_xor & (a1[1] ^ b1[1] ^ c[0] & ec)
 		| l & b1[0] | r & b1[2];
